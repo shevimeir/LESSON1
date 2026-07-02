@@ -1,28 +1,26 @@
-const http = require('http');
+const express = require('express'); 
+const app = express(); 
+const port = 3000; 
 
-const courses = [
-    { id: 101, name: "HTML & CSS Basics", description: "Learn the foundation of web development." },
-    { id: 102, name: "JavaScript Advanced", description: "Master closures, promises, and async/await." },
-    { id: 103, name: "Node.js Backend", description: "Build scalable servers and APIs from scratch." }
-];
-
-const server = http.createServer(async (req, res) => {
-    const { default: chalk } = await import('chalk');
-
-    console.log(chalk.yellow.bold('\n--- New Request Received! Printing Courses List: ---'));
-    console.log(chalk.magenta(JSON.stringify(courses, null, 2)));
-    console.log(chalk.yellow.bold('---------------------------------------------------\n'));
-
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    res.end(JSON.stringify(courses, null, 2));
+const coursesData = require('./courses');
+const studentsData = require('./students');
+app.get('/', (req, res) => {
+    res.json({
+        status: "running",
+        message: "Server is working beautifully!"
+    });
 });
 
-server.listen(3000, async () => {
-    const { default: chalk } = await import('chalk');
+app.get('/courses', (req, res) => {
+    res.json(coursesData); 
+});
 
-    console.log(chalk.blue('=============================================='));
-    console.log(chalk.green('🚀 Server is successfully running!'));
-    console.log(chalk.cyan('🌍 Visit: http://localhost:3000/'));
-    console.log(chalk.blue('=============================================='));
+app.get('/students', (req, res) => {
+    res.json(studentsData); 
+});
+app.get('/test-students', (req, res) => {
+    res.json(studentsData);
+});
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
