@@ -1,7 +1,6 @@
 const students = [
-    { id: 1, name: "שירה כהן", age: 20 },
-    { id: 2, name: "רחלי לוי", age: 22 },
-    { id: 3, name: "תמר מילר", age: 21 }
+  { id: 1, name: "Noa Cohen", email: "noa@gmail.com" },
+  { id: 2, name: "Maya Levi", email: "maya@gmail.com" }
 ];
 
 module.exports = students;
