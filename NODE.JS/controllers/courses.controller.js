@@ -38,3 +38,35 @@ export function createCourse(req, res) {
         return res.status(500).json({ message: "שגיאה פנימית בשרת", error: error.message });
     }
 }
+
+export function updateCourse(req, res) {
+    try {
+        const { id } = req.params;
+        const updateData = req.body;
+        
+        const updatedCourse = coursesService.updateCourse(id, updateData);
+        
+        if (!updatedCourse) {
+            return res.status(404).json({ message: "לא ניתן לעדכן: הקורס לא נמצא" });
+        }
+        
+        return res.status(200).json(updatedCourse);
+    } catch (error) {
+        return res.status(500).json({ message: "שגיאה פנימית בשרת", error: error.message });
+    }
+}
+
+export function deleteCourse(req, res) {
+    try {
+        const { id } = req.params;
+        const isDeleted = coursesService.deleteCourse(id);
+        
+        if (!isDeleted) {
+            return res.status(404).json({ message: "לא ניתן למחוק: הקורס לא נמצא" });
+        }
+        
+        return res.status(200).json({ message: "הקורס נמחק בהצלחה" });
+    } catch (error) {
+        return res.status(500).json({ message: "שגיאה פנימית בשרת", error: error.message });
+    }
+}
