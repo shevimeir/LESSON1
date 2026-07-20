@@ -1,0 +1,28 @@
+פרומפט 1:
+"What is the difference between an Express Router and a Controller? Explain the responsibility of each. Use a simple CRUD example."
+
+תשובה וסיכום שלב הראוטר והקונטרולר:
+- הראוטר (Router) אחראי אך ורק על ניתוב והתאמת כתובות ה-URL ומתודות ה-HTTP לפונקציה המתאימה.
+- הבקר (Controller) אחראי על ניהול פרוטוקול ה-HTTP, קבלת ה-req וחילוץ הפרמטרים, והחזרת תשובת ה-res ללקוח.
+
+------------------------------------------------------------
+
+פרומפט 2:
+"Describe what happens step by step when a GET request is processed in an Express application that uses routes, controllers, services and a data layer. Explain the responsibility of each layer."
+
+תשובה וסיכום מעגל חיי הקריאה (Request Lifecycle):
+1. השרת הראשי (app.js/index.js) מקבל את הקריאה ומפנה לראוטר המתאים.
+2. שכבת הניתוב (Routes) מתאימה את הנתיב ומפעילה את הקונטרולר.
+3. שכבת הבקרה (Controllers) מחלצת נתונים ופונה לשכבת השירות (Services).
+4. שכבת השירות (Services) מבצעת את הלוגיקה העסקית והחישובים ומבקשת נתונים משכבת הדאטה.
+5. שכבת המידע (Data) מחזיקה את מקור האמת של המידע ומחזירה אותו מעלה עד שהקונטרולר שולח res.json ללקוח.
+
+------------------------------------------------------------
+
+שלבי ביצוע הרה-פקטורינג (Refactoring) בפרויקט:
+1. הקמת תיקיית data/ והוצאת מערכי המידע לקבצים מופרדים (courses, students, subscriptions).
+2. יצירת שכבת השירות (services/) עבור הלוגיקה הטהורה של כל ישות.
+3. יצירת שכבת הבקרה (controllers/) לניהול בקשות ותשובות ה-HTTP.
+4. יצירת שכבת הניתוב (routes/) לחלוקת כתובות ה-API.
+5. הפיכת הפרויקט ל-ES Modules באמצעות עדכון "type": "module" ב-package.json.
+6. חיבור כל הראוטרים לקובץ index.js המרכזי ובדיקת CRUD מלאה ב-Postman.
